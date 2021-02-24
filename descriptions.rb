@@ -16,9 +16,10 @@ def get_descs(filename)
     file_data = file.readlines.map(&:chomp)
     File.foreach(filename) {|line| puts line[0..-2] + ': ' + get_desc(line[0..-2])}
 end
-
-if ARGV.length > 1 or ARGV.length < 1
-    put 'Error! Must pass 1 argument (filename)'
-else
-    get_descs(ARGV[0])
+if __FILE__ == $0
+    if ARGV.length > 1 or ARGV.length < 1
+        put 'Error! Must pass 1 argument (filename)'
+    else
+        get_descs(ARGV[0])
+    end
 end
