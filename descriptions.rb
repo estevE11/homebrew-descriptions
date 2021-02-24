@@ -1,8 +1,14 @@
 require 'httparty'
 
 def get_desc(name)
-    response = JSON.parse(HTTParty.get('https://formulae.brew.sh/api/' + name + '.json').body)[0]
-    return response["desc"]
+    desc = nil
+    response = HTTParty.get('https://formulae.brew.sh/api/' + name + '.json')
+    if response.code == 200
+        desc = JSON.parse(response.body)[0]["desc"]
+    else
+        return "Not found"
+    end
+    return desc
 end
 
 desc = get_desc("cask")
